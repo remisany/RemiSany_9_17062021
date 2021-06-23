@@ -33,7 +33,7 @@ export default class {
       JSON.parse(localStorage.getItem('user')).email : ""
     if (this.firestore) {
       return this.firestore
-      .bills()
+      .bills().orderBy("date", "desc")
       .get()
       .then(snapshot => {
         const bills = snapshot.docs
