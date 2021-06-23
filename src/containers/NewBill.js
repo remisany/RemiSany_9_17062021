@@ -19,18 +19,30 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+    const extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+    if (["jpg", "jpeg", "png"].includes(extension)) {
+      this.firestore
+        .storage
+        .ref(`justificatifs/${fileName}`)
+        .put(file)
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          this.fileUrl = url
+          this.fileName = fileName
+        })
+    } else {
+      const file = this.document.querySelector("Input[type='file']")
+      file.setCustomValidity("Format " + extension.toUpperCase() + " invalide. Format valide : JPG, JPEG ou PNG.");
+      this.fileName = "invalid";
+    }
   }
   handleSubmit = e => {
     e.preventDefault()
+
+    if (this.fileName === "invalid") {
+      return;
+    }
+
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
@@ -52,6 +64,7 @@ export default class NewBill {
 
   // not need to cover this function by tests
   createBill = (bill) => {
+    console.log(bill);
     if (this.firestore) {
       this.firestore
       .bills()
