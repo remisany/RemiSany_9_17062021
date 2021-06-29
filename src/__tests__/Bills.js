@@ -34,8 +34,8 @@ describe("Given I am connected as an employee", () => {
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
       }))
-      const newBill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
-      const handleClickNewBill = jest.fn(newBill.handleClickNewBill)
+      const bill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
+      const handleClickNewBill = jest.fn(bill.handleClickNewBill)
       const buttonNewBill = screen.getByTestId("btn-new-bill")
       buttonNewBill.addEventListener("click", handleClickNewBill)
       userEvent.click(buttonNewBill)
@@ -54,10 +54,10 @@ describe("Given I am connected as an employee", () => {
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
       }))
-      const newBill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
+      const bill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
       const iconEye = screen.getAllByTestId("icon-eye")[0]
       $.fn.modal = jest.fn();
-      const handleClickIconEye = jest.fn(newBill.handleClickIconEye(iconEye))
+      const handleClickIconEye = jest.fn(bill.handleClickIconEye(iconEye))
       iconEye.addEventListener("click", handleClickIconEye)
       userEvent.click(iconEye)     
       expect(handleClickIconEye).toHaveBeenCalled()
