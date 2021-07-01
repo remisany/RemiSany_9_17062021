@@ -3,7 +3,6 @@ import BillsUI from "../views/BillsUI.js"
 import { bills } from "../fixtures/bills.js"
 import userEvent from '@testing-library/user-event'
 import Bill from "../containers/Bills.js"
-import { localStorageMock } from "../__mocks__/localStorage.js"
 import { ROUTES } from "../constants/routes"
 import firebase from "../__mocks__/firebase"
 
@@ -23,10 +22,6 @@ describe("Given I am connected as an employee", () => {
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname })
       }
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-      window.localStorage.setItem('user', JSON.stringify({
-        type: 'Employee'
-      }))
       const bill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
       const handleClickNewBill = jest.fn(bill.handleClickNewBill)
       const buttonNewBill = screen.getByTestId("btn-new-bill")
@@ -43,10 +38,6 @@ describe("Given I am connected as an employee", () => {
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname })
       }
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-      window.localStorage.setItem('user', JSON.stringify({
-        type: 'Employee'
-      }))
       const bill = new Bill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
       const iconEye = screen.getAllByTestId("icon-eye")[0]
       $.fn.modal = jest.fn();
