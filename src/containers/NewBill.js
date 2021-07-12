@@ -16,10 +16,13 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
+    const inputFile = this.document.querySelector("Input[type='file']")
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
     const extension = fileName.substring(fileName.lastIndexOf(".") + 1)
+    console.log(extension)
     if (["jpg", "jpeg", "png"].includes(extension)) {
+      inputFile.setCustomValidity("")
       this.firestore
         .storage
         .ref(`justificatifs/${fileName}`)
@@ -30,8 +33,7 @@ export default class NewBill {
           this.fileName = fileName
         })
     } else {
-      const file = this.document.querySelector("Input[type='file']")
-      file.setCustomValidity("Format " + extension.toUpperCase() + " invalide. Format valide : JPG, JPEG ou PNG.");
+      inputFile.setCustomValidity("Format " + extension.toUpperCase() + " invalide. Format valide : JPG, JPEG ou PNG.");
       this.fileName = "invalid";
     }
   }
