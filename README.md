@@ -1,50 +1,54 @@
-**Comment lancer l'application en local** :
+# RemiSany_9_17052021
 
-Clonez le projet :
-```
-$ git clone https://github.com/OpenClassrooms-Student-Center/Billed-app-FR.git
-```
+## Projet 9 "Débuggez et testez un SaaS RH."
 
-Allez au repo cloné :
-```
-$ cd Billed-app-FR
-```
+### CONTEXTE
 
-Installez les packages npm (décrits dans `package.json`) :
-```
-$ npm install
-```
+#### Fiabiliser et améliorer le parcours employé :
+- Fixer les bugs identifiés.
+- Ajouter des tests unitaires et d'intégration.
+- Rédiger un plan de test End-to-End pour le parcours employé
 
-Installez live-server pour lancer un serveur local :
-```
-$ npm install -g live-server
-```
+#### Bugs :
+- Les notes de frais ne s’affichent pas par ordre décroissant.
+- Il n’est pas possible de se connecter en tant qu’administrateur.
+- Tous les formats de justificatifs sont actuellement acceptés, ce qui provoque un problème d’affichage.
+- Sur le Dashboard administrateur, il n’est pas possible de déplier plusieurs listes de tickets et d’ensuite sélectionner un ticket.
 
-Lancez l'application :
-```
-$ live-server
-```
-
-Puis allez à l'adresse : `http://127.0.0.1:8080/`
+#### Tests unitaires et d'intégration :
+- Composant containers/Bills.
+    - Couvrir tous les statements sauf les appels au back-end firebase.
+    - Ajouter un test d’intégration GET Bills.
+- Composant containers/NewBill.
+    - Couvrir tous les statements sauf les appels au back-end firebase.
+    - Ajouter un test d’intégration POST NewBill.
 
 
-**Comment lancer tous les tests en local avec Jest :**
+#### Plan de test End-to-End :
+- [Plan E2E parcours employé](./Plan_E2E_ParcoursEmployé.pdf)
 
-```
-$ npm run test
-```
+### TECHNOLOGIES UTILISÉES
+- HTML5.
+- CSS3.
+- Javascript.
+- React
+- Jest
+- React Testing Library
+- Visual Studio Code.
 
-**Comment lancer un seul test :**
+Projet validé le 15 juillet 2021.
 
-Installez jest-cli :
 
-```
-$npm i -g jest-cli
-$jest src/__tests__/your_test_file.js
-```
+### INFORMATIONS COMPLEMENTAIRES
 
-**Comment voir la couverture de test :**
+#### LANCER L'APPLICATION EN LOCAL
+- Téléchargez le projet
+- Accédez au dossier
+- Installez les packages npm (décrits dans `package.json`) : npm install
+- Installez live-server pour lancer un serveur local : npm install -g live-server
+- Lancez l'application : live-server
 
-`http://127.0.0.1:8080/coverage/lcov-report/`
-
+#### LANCER TOUS LES TESTS EN LOCAL AVEC JEST
+- npm run test
+- Voir la couverture de test: `http://127.0.0.1:8080/coverage/lcov-report/`
 
